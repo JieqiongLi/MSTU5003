@@ -1,0 +1,13 @@
+.lifeBoard .row {
+    height: 12px;
+}
+.lifeBoard .row .cell {
+    float: left;
+    background-color: white;
+    border: 1px solid grey;
+    width: 10px;
+    height: 10px;
+}
+.lifeBoard .row .cell.alive {
+    background-color: black;
+}
