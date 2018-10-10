@@ -14,11 +14,8 @@ captionElement.appendChild(captionText);
 
 console.log(captionElement);
 
-
 FEATURED.appendChild(captionElement);
-
 THEIMAGE.setAttribute("alt", "");
-
 
 
 /////////////////////////////////////////////////////////////////
@@ -40,4 +37,3 @@ document.querySelector(".cta a").setAttribute("style", "padding: 2em");
 
 document.querySelector(".cta a").setAttribute("style", "padding: 2em; color: green; background-color: orange;");
 //Always target class. If fails, then try inline CSS
-
