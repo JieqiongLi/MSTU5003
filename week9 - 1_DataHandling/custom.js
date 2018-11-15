@@ -48,7 +48,7 @@ var data = [
 
 // Important Elements - Cached as variables
 var todosEl = document.querySelector('#todos');
-var inputEl = document.querySelector('input');
+var inputEl = document.querySelector('#todoInput');//bug fix
 var completedEl = document.querySelector('#counter');
 
 function initializeTodos() {
@@ -58,33 +58,39 @@ function initializeTodos() {
 function updateTodoItems() {
 	var todosHTML = "";
 
+	//loop through all items
 	for (todo of data) {
 		if (todo.done) {
 			todosHTML += `<li id="${ todo.id }" class="complete" onclick="toggleComplete(event)">`;
-			todosHTML += `<i class="fa fa-check-circle-o"></i>`; // Font-awesome
+			todosHTML += `<i class="fa fa-check-circle"></i> `; // Font-awesome
 		} else {
 			todosHTML += `<li id="${ todo.id }" onclick="toggleComplete(event)">`;
-			todosHTML += `<i class="fa fa-circle-o"></i>`; // Font-awesome
+			todosHTML += `<i class="fa fa-circle"></i> `; // Font-awesome
 		}
 		todosHTML += `${ todo.task }`;
 		todosHTML += `</li>`;
 	}
 
+	//if "data" is empty
 	if (todosHTML === "") {
 		todosHTML = "<li>Nothing todo...</li>";
 	}
 
+	//fill string into HTML
 	todosEl.innerHTML = todosHTML;
+	//re-examine all item to have [Remove] button remove all completed items
 	updateRemoveBtn();
 }
 
 function updateRemoveBtn() {
+	//return all items that has "todo.done==true"
 	var completedTodos = data.filter(function(todo){
 	  return todo.done === true;
 	});
 
 	completedEl.textContent = completedTodos.length;
 
+	//if there is still undone items, then make completeEL enable, otherwise disable it
 	if (completedTodos.length) {
 		completedEl.parentElement.disabled = false;
 	} else {
@@ -93,6 +99,7 @@ function updateRemoveBtn() {
 }
 
 function onEnterKey(event) {
+	//press "Enter" key to trigger addTodoItem()
 	if (event.code === "Enter") {
 		addTodoItem();
 	}
@@ -107,10 +114,13 @@ function validateTask(task) {
 }
 
 function addTodoItem() {
+	//make sure the input value is not empty, otherwise just return
 	if (!validateTask(inputEl.value)) {
+		console.log("content is empty, returning...")
 		return;
 	}
 
+	//create a new object and have it pushed into [data]
 	var newTodo = {
 		id: getTimeStamp()
 	};
@@ -120,14 +130,22 @@ function addTodoItem() {
 
 	data.push(newTodo);
 
+	//update the list
 	updateTodoItems();
+	//make input value ""
 	resetInput();
 }
 
 function toggleComplete(event) {
 	var todoID = parseInt(event.currentTarget.id);
-	var todoData = getTodoData(todoID);
-	todoData.done = !todoData.done;
+
+	
+	for(item of data) {
+		if(item.id == todoID) {
+			item.done = !item.done;
+		}
+	}
+
 	updateTodoItems();
 }
 
