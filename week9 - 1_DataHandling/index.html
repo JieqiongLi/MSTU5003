@@ -251,13 +251,14 @@
       <h3 class="text-center">Leave A Message</h3>
 
       <ul id="todos">
-        <!-- ITEMS HERE -->
+        <!--  Item Will be listed here -->
       </ul>
 
       <div class="controls">
-        <input id="todoInput" type="text" onkeypress="onEnterKey(event)">
+        <input id="todoInput" type="text">
         <button onclick="addTodoItem()">Add</button>
-        <button onclick="removeTodoItem()"><span id="counter"></span> Remove</button>
+        <button onclick="removeTodoItem()">Remove <span id="counter"></span> Item</button>
+        <!-- <button onclick="markAllComplete()">Mark All Complete</button> -->
       </div>
     </div>
 
